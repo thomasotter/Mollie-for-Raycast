@@ -126,15 +126,12 @@ const getStatusTag = (status: Payment["status"]): List.Item.Accessory => {
 function PaymentsList({ accessToken }: { accessToken: string }) {
   const [statusFilter, setStatusFilter] = useState<string>("all");
 
-  const { data, isLoading, revalidate } = useFetch<PaginatedPayments>(
-    `https://api.mollie.com/v2/payments?limit=250`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      keepPreviousData: true,
+  const { data, isLoading, revalidate } = useFetch<PaginatedPayments>(`https://api.mollie.com/v2/payments?limit=250`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
     },
-  );
+    keepPreviousData: true,
+  });
 
   const allPayments = data?._embedded?.payments || [];
 
@@ -245,10 +242,7 @@ function PaymentsList({ accessToken }: { accessToken: string }) {
             icon={paymentMethodIcon}
             title={payment.description || "No description"}
             subtitle={formattedDateTime}
-            accessories={[
-              statusTag,
-              { text: formatCurrency(payment.amount.value, payment.amount.currency) },
-            ]}
+            accessories={[statusTag, { text: formatCurrency(payment.amount.value, payment.amount.currency) }]}
             actions={
               <ActionPanel>
                 <Action.OpenInBrowser url={payment._links.dashboard.href} title="Open in Mollie Dashboard" />
@@ -261,9 +255,9 @@ function PaymentsList({ accessToken }: { accessToken: string }) {
                     shortcut={{ modifiers: ["cmd"], key: "r" }}
                   />
                 )}
-                <Action.CopyToClipboard title="Copy Payment ID" content={payment.id} />
+                <Action.CopyToClipboard title="Copy Payment Id to Clipboard" content={payment.id} />
                 <Action.CopyToClipboard
-                  title="Copy Amount"
+                  title="Copy Amount to Clipboard"
                   content={formatCurrency(payment.amount.value, payment.amount.currency)}
                   shortcut={{ modifiers: ["cmd", "shift"], key: "c" }}
                 />
