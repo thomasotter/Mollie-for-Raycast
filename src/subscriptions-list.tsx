@@ -129,7 +129,7 @@ function SubscriptionsList({ accessToken }: { accessToken: string }) {
         Authorization: `Bearer ${accessToken}`,
       },
       keepPreviousData: true,
-    }
+    },
   );
 
   const allSubscriptions = data?._embedded?.subscriptions || [];
@@ -190,7 +190,7 @@ function SubscriptionsList({ accessToken }: { accessToken: string }) {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -237,12 +237,12 @@ function SubscriptionsList({ accessToken }: { accessToken: string }) {
           <List.Dropdown.Section title="Status">
             <List.Dropdown.Item title="Active" value="active" icon={{ source: Icon.Dot, tintColor: Color.Green }} />
             <List.Dropdown.Item title="Pending" value="pending" icon={{ source: Icon.Dot, tintColor: Color.Orange }} />
+            <List.Dropdown.Item title="Suspended" value="suspended" icon={{ source: Icon.Dot, tintColor: Color.Red }} />
             <List.Dropdown.Item
-              title="Suspended"
-              value="suspended"
-              icon={{ source: Icon.Dot, tintColor: Color.Red }}
+              title="Completed"
+              value="completed"
+              icon={{ source: Icon.Dot, tintColor: Color.Blue }}
             />
-            <List.Dropdown.Item title="Completed" value="completed" icon={{ source: Icon.Dot, tintColor: Color.Blue }} />
             <List.Dropdown.Item
               title="Canceled"
               value="canceled"
